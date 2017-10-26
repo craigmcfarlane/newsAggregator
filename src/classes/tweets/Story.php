@@ -6,28 +6,26 @@
  * Time: 11:07 PM
  */
 
-namespace classes;
+namespace classes\tweets;
 
-class NewsStory
+class Story
 {
     protected $title;
     protected $url;
     protected $datePublished;
-    protected $category;
 
     /**
-     * NewsStory constructor.
+     * Story constructor.
      * @param $title
      * @param $url
      * @param $datePublished
      * @param $section
      */
-    public function __construct($title, $url, $datePublished, $section)
+    public function __construct($name, $url, $datePublished)
     {
-        $this->title = $title;
+        $this->name = $name;
         $this->url = $url;
         $this->datePublished = $datePublished;
-        $this->category = $section;
     }
 
     /**
@@ -76,22 +74,6 @@ class NewsStory
     public function setDatePublished($datePublished)
     {
         $this->datePublished = $datePublished;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getCategory()
-    {
-        return $this->category;
-    }
-
-    /**
-     * @param mixed $category
-     */
-    public function setCategory($category)
-    {
-        $this->category = $category;
     }
 
 }

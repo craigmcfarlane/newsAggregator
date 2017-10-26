@@ -6,9 +6,10 @@
  * Time: 9:46 AM
  */
 
-namespace classes;
+namespace classes\news;
 
-class NewsRequests
+
+class Requests
 {
     private $baseUrl = "https://www.googleapis.com/customsearch/v1?";
     private $apiKey = "AIzaSyD363DS7XXOqQUITbUW3eHfMsdQ4iqmoIQ";
@@ -18,7 +19,7 @@ class NewsRequests
     protected $result;
 
     /**
-     * NewsRequests constructor.
+     * Requests constructor.
      * @param $search
      */
     public function __construct($search, $engineId)
@@ -43,7 +44,7 @@ class NewsRequests
 
     public function createNews()
     {
-        $news = new NewsStoryArray($this->result);
+        $news = new StoryArray($this->result);
         return $news;
     }
 

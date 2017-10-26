@@ -6,13 +6,12 @@
  * Time: 9:54 PM
  */
 
-namespace classes;
-require "NewsStory.php";
+namespace classes\tweets;
 
 /**
  * this class takes the response from google and turns it into something prettier
  */
-class NewsStoryArray
+class StoryArray
 {
     protected $storyArray = array();
 
@@ -26,11 +25,11 @@ class NewsStoryArray
         foreach ($responseArray as $response)
         {
 
-            $story = new NewsStory(
-                $response->title,
-                $response->link,
-                $response->pagemap->metatags[0]->pubdate,
-                $response->pagemap->metatags[0]->section);
+            $story = new Story(
+                $response->user->name,
+                $response->text,
+                $response->created_at
+            );
             $this->addStory($story);
         }
     }

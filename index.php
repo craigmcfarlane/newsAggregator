@@ -7,23 +7,33 @@
  */
 
 // php index.php cnn trump
+// php index.php twitter trump
 // php index.php cnn all politics
-namespace classes;
-require "classes/NewsStoryArray.php";
-require "classes/NewsSite.php";
-require "classes/NewsRequests.php";
+require __DIR__ . "/vendor/autoload.php";
 
-if (strtolower($argv[1]) != 'cnn' && strtolower($argv[1]) != 'bbc')
-    die ("Please try to search CNN or BBC.\n");
+use classes\tweets as tw;
+use classes\news as news;
+$news = false;
 
-$site = new NewsSite(strtolower($argv[1]));
-$request = new NewsRequests($argv[2], $site->getCode());
+if (strtolower($argv[1]) == 'twitter')
+    $request = new tw\Requests($argv[2]);
+else if (strtolower($argv[1]) == 'cnn' && strtolower($argv[1]) == 'bbc')
+    $request = new news\Requests($argv[2], $site->getCode());
+else
+    die ("Please try to search Twitter, CNN or BBC.\n");
+
+$site = new classes\Site(strtolower($argv[1]));
 
 $result = $request->sendRequest();
-
-
-if ($result < 300)
+if (strtolower($argv[1]) == 'cnn' && strtolower($argv[1]) == 'bbc')
+{
+    if ($result < 300)
+        $news = $request->createNews();
+}
+else if (strtolower($argv[1]) == 'twitter')
+{
     $news = $request->createNews();
+}
 
 if (!isset($news))
     die ("Sorry no stories matched that\n");

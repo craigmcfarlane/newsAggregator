@@ -8,7 +8,7 @@
 
 namespace classes;
 
-class NewsSite
+class Site
 {
     protected $site;
     protected $code;
